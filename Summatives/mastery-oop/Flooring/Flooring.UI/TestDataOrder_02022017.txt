@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Lord Bad GUY,PA,6.75,Carpet,100,2.25,2.10,225,210,29.3625,464.3625

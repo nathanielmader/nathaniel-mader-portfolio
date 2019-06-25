@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Garett,OH,0.625,Carpet,100,2.25,2.10,225.00,210.00,2.7187500,437.7187500

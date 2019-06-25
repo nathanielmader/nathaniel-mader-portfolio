@@ -1,0 +1,2 @@
+OrderDate,OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+5/20/2019 12:00:00 AM,1,hffhfhf,OH,0.625,Tile,100,3.50,4.15,350.00,415.00,4.7812500,769.7812500
