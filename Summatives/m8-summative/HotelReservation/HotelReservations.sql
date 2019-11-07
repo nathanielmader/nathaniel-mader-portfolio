@@ -1,0 +1,106 @@
+USE master;
+go
+
+if exists (select * from sysdatabases where name='HotelReservations')
+	drop database HotelReservations
+
+Create database HotelReservations;
+go
+
+use HotelReservations;
+go
+
+CREATE TABLE AddOns(
+	AddOnID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	AddOnDescription VARCHAR(MAX) NOT NULL
+)
+
+CREATE TABLE AddOnRate(
+	AddOnRateID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Rate DECIMAL NOT NULL,
+	AddOnID INT FOREIGN KEY REFERENCES AddOns(AddOnID) NOT NULL
+)
+
+CREATE TABLE Customer(
+	CustomerID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	FirstName VARCHAR(50) NOT NULL,
+	LastName VARCHAR (50) NOT NULL,
+	PhoneNumber VARCHAR (15) NOT NULL,
+	Email VARCHAR (50) NULL,
+	BillingStreet VARCHAR(50) NOT NULL,
+	BillingCity VARCHAR (50) NOT NULL,
+	BillingStateAbbreviation VARCHAR (2) NULL,
+	BillingPostalCode VARCHAR (10) NOT NULL,
+	BillingCountry VARCHAR (100) NOT NULL
+)
+CREATE TABLE PromotionType(
+	PromotionTypeID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	PromotionDescription VARCHAR (100) NOT NULL
+)
+CREATE TABLE Promotions(
+	PromotionsID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	StartDate DATETIME2 NOT NULL,
+	EndDate DATETIME2 NOT NULL,
+	Amount DECIMAL NOT NULL,
+	PromotionTypeID INT FOREIGN KEY REFERENCES PromotionType(PromotionTypeID) NOT NULL
+)
+CREATE TABLE Amenity(
+	AmenityID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	AmenityDescription VARCHAR (30) NOT NULL
+)
+CREATE TABLE RoomType(
+	RoomTypeID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	BedType VARCHAR(15) NOT NULL,
+
+)
+CREATE TABLE Room(
+	RoomID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	RoomNumber INT NOT NULL,
+	FloorNumber INT NOT NULL,
+	OccupancyLimit INT NOT NULL,
+	RoomTypeID INT FOREIGN KEY REFERENCES RoomType(RoomTypeID) NOT NULL--Or should this be RoomType(BedType)??
+)
+CREATE TABLE RoomReservation(
+	RoomReservationID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	RoomID INT FOREIGN KEY REFERENCES Room(RoomID) NOT NULL
+)
+CREATE TABLE RoomAmenity(
+	RoomAmenityID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	RoomID INT FOREIGN KEY REFERENCES Room(RoomID) NOT NULL,
+	AmenityID INT FOREIGN KEY REFERENCES Amenity(AmenityID) NOT NULL
+)
+CREATE TABLE RoomRate(
+	RoomRateID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	RoomTypeID INT FOREIGN KEY REFERENCES RoomType(RoomTypeID) NOT NULL,
+	StartDate DATETIME2 NOT NULL,
+	EndDate DATETIME2 NOT NULL,
+	Rate DECIMAL NOT NULL
+)
+CREATE TABLE Reservation(
+	ReservationID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	StartDate DATETIME2 NOT NULL,
+	EndDate DATETIME2 NOT NULL,
+	PromotionID INT FOREIGN KEY REFERENCES Promotions(PromotionsID) NOT NULL,
+	CustomerID INT FOREIGN KEY REFERENCES Customer(CustomerID) NOT NULL
+)
+CREATE TABLE BillTotals(
+	BillTotalsID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	TaxTotal DECIMAL NOT NULL,
+	BillTotal DECIMAL NOT NULL,
+	ReservationID INT FOREIGN KEY REFERENCES Reservation(ReservationID) NOT NULL
+)
+CREATE TABLE BillDetails(
+	BillDetailsID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	BillID INT FOREIGN KEY REFERENCES BillTotals(BillTotalsID) NOT NULL,
+	RoomRateID INT FOREIGN KEY REFERENCES RoomRate(RoomRateID) NOT NULL,
+	AddOnID INT FOREIGN KEY REFERENCES AddOns(AddOnID) NOT NULL,
+	ReservationID INT FOREIGN KEY REFERENCES Reservation(ReservationID) NOT NULL
+)
+CREATE TABLE Guest(--not all reservations have guests?
+	GuestID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	FirstName VARCHAR (50) NOT NULL,
+	LastName VARCHAR (100) NOT NULL,
+	Age INT NOT NULL,
+	ReservationID INT FOREIGN KEY REFERENCES Reservation(ReservationID) NOT NULL--???????????????"
+
+)

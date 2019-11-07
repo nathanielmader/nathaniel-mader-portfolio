@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Vending Machine</title>
+      <style>.vendingItem{border:2px solid black}</style>
+      <link href="css/bootstrap.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+    <h1 class="text-center" id="projectTitle">Vending Machine</h1>
+    <hr/>
+    <br />
+    <!-- -------------------Items List Div------------------------- -->
+    <div class="row">
+        <div class="col-md-9">
+          <div class="row" id="itemArray">
+
+          </div>
+        </div>
+<!-- -------------------   Money Buttons   ------------------------- -->
+        <div class="col-md-3" "text-center">
+            <div class="row">
+                        <div class="form-group">
+                              <div class="col-md-12" id="money-deposit-form">
+                                    <h2 class="text-center"style="font-size:30px">Total $ In</h2>
+                                    <input type="text" id="money-inserted-display" class="text-center" style="font-size:30px; width: 310px" readonly/>
+                              </div>
+                        </div>
+                        <br />
+                        <div class="form-group"style="text-align: center;">
+                                  <button class="btn btn-primary" id="add-dollar-button"style="font-size: 15px; height: 40px; width:120px">Add Dollar</button>
+                                  <button class="btn btn-primary" id="add-quarter-button"style="font-size: 15px; height: 40px; width:120px">Add Quarter</button>
+                        </div>
+                        <div class="form-group"style="text-align: right;">
+                                  <button class="btn btn-primary" id="add-dime-button"style="font-size: 15px; height: 40px; width:120px">Add Dime</button>
+                                  <button class="btn btn-primary" id="add-nickel-button"style="font-size: 15px; height: 40px; width:120px">Add Nickel</button>
+                        </div>
+            </div>
+            <hr />
+            <!-- ------------------- Message Div ------------------------- -->
+            <div class="row">
+                        <div class="form-group">
+                                <div class="col-md-12" id="messages-item-form">
+                                      <h2 class="text-center" style="font-size: 30px">Messages</h2>
+                                      <input type="text" id="display-message" class="text-center" style="font-size:30px; width:310px" readonly/>
+                                      <br />
+                                      <br />
+                                      <label class="col-md-3" style="font-size:30px; height: 50px">Item:</label>
+                                              <input class="text" id="item-id-choosen" readonly/>
+                                              <div class="form-group"style="text-align: center;">
+                                              <button type="button" id="make-purchase"class="btn btn-warning"style="font-size: 25px; height: 50px; width:290px">Make Purchase</button>
+                                            </div>
+                                      <hr />
+                                </div>
+                        </div>
+            </div>
+            <!-- -------------------  Change  ------------------------- -->
+            <div class="row">
+                  <div class="form-group">
+                          <div class="col-md-12" id="change-form">
+                                    <h2 class="text-center" style="font-size: 30px">Change</h2>
+                                    <input type="text" id="display-change-window" class="text-center"style="font-size:15px; width:310px" readonly/>
+                                    <br />
+                                    <br />
+                                    <div class="form-group"style="text-align: center;">
+                                        <button type="button" class="btn btn-danger" id="return-change-button"style="font-size: 25px; height: 50px; width:290px">Change Return</button>
+                                    </div>
+                          </div>
+                  </div>
+            </div>
+    </div>
+  </div>
+      <script src="js/jquery-2.2.4.min.js"></script>
+      <script src="js/home.js"></script>
+  </body>
+</html>
