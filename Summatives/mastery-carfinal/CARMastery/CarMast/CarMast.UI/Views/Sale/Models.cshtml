@@ -1,0 +1,86 @@
+﻿@model CarMast.UI.Models.AddModelViewModel
+
+@{
+
+    ViewBag.Title = "Models";
+
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Models</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("AddModel", "Sale", FormMethod.Post, new { id = "frmAddModel"}))
+            {
+                <div class="row">
+                    <div class="form-group">
+                        <label>New Model</label>
+                        @Html.TextBoxFor(x => x.Model.ModelDescription, new { @class = "form-control"})
+                        <span class="text-danger">@Html.ValidationMessageFor(x => x.Model.ModelDescription)</span>
+                    </div>
+                    <div class="form-group row">
+                        <label>Make</label>
+                        @Html.DropDownListFor(x => x.Model.MakeId, Model.MakesList, new { @class = "form-control" })
+                        <span class="text-danger">@Html.ValidationMessageFor(x => x.Model.MakeId)</span>
+                    </div>
+                    <button type="submit" class="btn-btn-sm btn-primary" id="saveModelButton">Save</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4" id="modelsTableDiv">
+            <table class="table table-striped" id="modelTable">
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Date Added</th>
+                    <!--<th>User</th>-->
+                </tr>
+                <tbody id="modelContentRows"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            loadTable();
+        });
+
+        function loadTable() {
+            var contentRows = $('#modelContentRows');
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:51539/api/sales/models/getall",
+                success: function (modelArray) {
+                    $.each(modelArray, function (index, item) {
+                        var make = item.Make.MakeDescription;
+                        var model = item.ModelDescription;
+                        var date = item.DateAdded;
+                        //var user = item.user;
+
+                        var row = '<tr>';
+                        row += '<td>' + make + '</td>';
+                        row += '<td>' + model + '</td>';
+                        row += '<td>' + date + '</td>';                        
+                        row += '</tr>';
+
+                        contentRows.append(row);
+                        //row += '<td>' + user + '</td>';
+                    });
+                },
+                error: function () {
+
+                }
+            });
+        }
+    </script>
+}
+

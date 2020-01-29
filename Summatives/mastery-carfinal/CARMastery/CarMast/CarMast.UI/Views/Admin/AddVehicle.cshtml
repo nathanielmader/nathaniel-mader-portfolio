@@ -1,0 +1,122 @@
+﻿@model CarMast.UI.Models.VehicleAdminViewModel
+@{
+    ViewBag.Title = "AddVehicle";
+}
+
+<div class="row">
+    <h1>AddVehicle</h1>
+    @using (Html.BeginForm("AddVehicle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddVehicle" }))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Make</label>
+                    @Html.DropDownListFor(x => x.Vehicle.Model.ModelId, Model.VehicleMakesList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.Model.ModelId)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Model</label>
+                    @Html.DropDownListFor(x => x.Vehicle.Model.MakeId, Model.VehicleModelsList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.Model.MakeId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Type</label>
+                    @Html.DropDownListFor(x => x.Vehicle.VehicleType.VehicleTypeId, Model.VehicleTypesList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.VehicleType.VehicleTypeId)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Body Style</label>
+                    @Html.DropDownListFor(x => x.Vehicle.BodyStyleId, Model.BodyStylesList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.BodyStyleId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Year</label>
+                    @Html.TextBoxFor(x => x.Vehicle.Year, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.Year)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Transmission</label>
+                    @Html.DropDownListFor(x => x.Vehicle.TransmissionId, Model.TransmissionsList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.TransmissionId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Color</label>
+                    @Html.DropDownListFor(x => x.Vehicle.ExteriorColorId, Model.ExteriorColorsList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.ExteriorColorId)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Interior</label>
+                    @Html.DropDownListFor(x => x.Vehicle.InteriorColorId, Model.InteriorColorsList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.InteriorColorId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Mileage</label>
+                    @Html.TextBoxFor(x => x.Vehicle.Mileage, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.Mileage)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>VIN #</label>
+                    @Html.TextBoxFor(x => x.Vehicle.Vin, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.Vin)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>MSRP</label>
+                    @Html.TextBoxFor(x => x.Vehicle.MSRP, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.MSRP)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Sale Price</label>
+                    @Html.TextBoxFor(x => x.Vehicle.SalePrice, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.SalePrice)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(x => x.Vehicle.VehicleDescription, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Vehicle.VehicleDescription)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Picture</label>
+                    <input id="ImageUpload" name="ImageUpload" type="file" class="form-control"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    }
+</div>
+
