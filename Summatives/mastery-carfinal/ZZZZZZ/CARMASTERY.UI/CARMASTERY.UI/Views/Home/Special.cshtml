@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CARMASTERY.Models.DataModels.Special>
+
+@{
+    ViewBag.Title = "Special";
+}
+
+<!--Page Seems to Work-->
+<h2>Specials</h2>
+<div class="row">
+    @foreach (var special in Model)
+    {
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-5">
+                        <img src="~/Images/SpecialPlaceholder.png" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <h2>@special.SpecialTitle</h2>
+                        </div>
+                        <div class="row">
+                            <p>@special.SpecialDescription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

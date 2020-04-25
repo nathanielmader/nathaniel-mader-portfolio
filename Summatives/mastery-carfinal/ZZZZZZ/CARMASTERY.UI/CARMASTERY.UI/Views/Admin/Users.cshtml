@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CARMASTERY.Models.DataModels.User>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Users</h1>
+        @Html.ActionLink("Add a new User", "AddUser", "Admin")
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped" style="border: 2px solid black">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.LastName</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditUser", "Admin", new { id = user.UserId }, new { @class = "btn btn-danger", @id = "user.UserId" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

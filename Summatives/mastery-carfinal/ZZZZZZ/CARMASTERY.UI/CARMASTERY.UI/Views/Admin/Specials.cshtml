@@ -1,0 +1,75 @@
+﻿@model CARMASTERY.Models.ViewModels.AminSpecialVM
+
+@{
+    ViewBag.Title = "Specials";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Specials</h1>
+    </div>
+</div>
+<div class="container" style="border: 2px solid black">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateSpecial", "Admin"))
+        {
+            <div class="col-md-4">
+                @*<div class="form-group row">
+                        <label>Title</label>
+                        <input class="form-control" type="text" name="SpecialTitle " id="SpecialTitle" />
+                    </div>*@
+                <div class="form-group">
+                    <label>Title</label>
+                    @Html.TextBoxFor(x => x.Special.SpecialTitle, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Special.SpecialTitle)</span>
+                </div>
+                <div class="row"></div>
+                @*<div class="form-group row">
+                        <label>Description</label>
+                        <textarea class="form-control" type="text" name="SpecialDescription " id="SpecialDescription"></textarea>
+                    </div>*@
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(x => x.Special.SpecialDescription, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Special.SpecialDescription)</span>
+                </div>
+                <div class="row"></div>
+                <div class="row">
+                    <div class="form-group">
+                        <button type="submit" id="addSpecialButton" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<div class="container">
+    @foreach (var special in Model.SpecialsList)
+    {
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        <!--<img src="~/Images/SpecialPlaceholder.png" />-->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <strong>@special.SpecialTitle</strong>
+                        </div>
+                        <div class="row">
+                            <p>@special.SpecialDescription</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <!--@Html.ActionLink("Delete", "DeleteSpecial", "Admin", new { @class = "btn btn-danger", @id = "special.SpecialId" })-->
+                        @Html.ActionLink("Delete", "DeleteSpecial", "Admin", new { id = special.SpecialId }, new { @class = "btn btn-danger", @id = "special.SpecialId" })
+                        <!--<button type="submit" class="btn btn-danger" id="deleteSpecialButton">Delete</button>-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+

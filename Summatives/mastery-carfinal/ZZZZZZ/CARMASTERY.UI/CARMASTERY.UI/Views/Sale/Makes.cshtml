@@ -1,0 +1,75 @@
+﻿@model CARMASTERY.Models.DataModels.Make
+@{
+            ViewBag.Title = "Makes";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Makes</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Makes", "Sale", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>New Make</label>
+                    @Html.TextBoxFor(x => x.MakeDescription, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.MakeDescription)</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-btn-sm btn-primary" id="saveMakeButton">Save</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4" id="makesTableDiv">
+            <table class="table table-striped" id="makesTable">
+                <tr>
+                    <th>Make</th>
+                    <th>Date Added</th>
+                    <!--<th>User</th>-->
+                </tr>
+                <tbody id="makeContentRows"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            loadTable();
+        });
+
+        function loadTable() {
+            var contentRows = $('#makeContentRows');
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:50451/api/sales/makes/getall",
+                success: function (makeArray) {
+                    $.each(makeArray, function (index, item) {
+
+                        var date = (new Date(item.DateCreated)).toLocaleDateString('en-US');
+                        var make = item.MakeDescription;
+
+                        var row = '<tr>';
+                        row += '<td>' + make + '</td>';
+                        row += '<td>' + date + '</td>';
+                        row += '</tr>';
+
+                        contentRows.append(row);
+                    });
+                },
+                error: function () {
+
+                }
+            });
+        }
+    </script>
+}

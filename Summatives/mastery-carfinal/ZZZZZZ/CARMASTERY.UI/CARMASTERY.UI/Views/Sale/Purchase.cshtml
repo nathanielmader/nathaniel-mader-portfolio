@@ -1,0 +1,162 @@
+﻿@model CARMASTERY.UI.Models.ViewModels.PurchaseViewModel
+
+@{
+    ViewBag.Title = "Purchase";
+}
+<div class="row" id="purchaseVehicleDetails">
+    <div class="col-md-12">
+        <br />
+        <h1>Purchase Vehicle</h1>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div class="row">
+                        <p>@Model.Vehicle.Year @Model.Vehicle.Model.Make.MakeDescription @Model.Vehicle.Model.ModelDescription</p>
+                    </div>
+                    <div class="row">
+                        <img src="@Url.Content("~/Images/" + Model.Vehicle.ImageFileName)" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row"></div>
+                    <div class="row">
+                        <p>Body Style: @Model.Vehicle.BodyStlye.BodyStyleDescription</p>
+                    </div>
+                    <div class="row">
+                        <p>Trans: @Model.Vehicle.Transmission.TransmissionType</p>
+                    </div>
+                    <div class="row">
+                        <p>Color: @Model.Vehicle.ExteriorColor.ExteriorColorDescription</p>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>Description: @Model.Vehicle.VehicleDescription</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row"></div>
+                    <div class="row">
+                        <p>Interior: @Model.Vehicle.InteriorColor.InteriorColorDescription</p>
+                    </div>
+                    <div class="row">
+                        <p>Mileage: @Model.Vehicle.Mileage</p>
+                    </div>
+                    <div class="row">
+                        <p>VIN #: @Model.Vehicle.Vin</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row"></div>
+                    <div class="row">
+                        <p>Sale Price: @string.Format("{0:C0}", Model.Vehicle.SalePrice)</p>
+                    </div>
+                    <div class="row">
+                        <p>MSRP: @string.Format("{0:C0}", Model.Vehicle.MSRP)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="salesInfoForm">
+    <h1>Sales Information</h1>
+    <br />
+    @using (Html.BeginForm("Purchase", "Sale", FormMethod.Post, new { id = "frmAddPurchase" }))
+    {
+        @Html.HiddenFor(x => x.Vehicle.VehicleId);
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Name</label>
+                    @Html.TextBoxFor(x => x.Purchase.Name, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.Name)</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Phone</label>
+                    @Html.TextBoxFor(x => x.Purchase.Phone, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.Phone)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Email</label>
+                    @Html.TextBoxFor(x => x.Purchase.Email, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.Email)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Street 1</label>
+                    @Html.TextBoxFor(x => x.Purchase.StreetAddress1, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.StreetAddress1)</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Street 2</label>
+                    @Html.TextBoxFor(x => x.Purchase.StreetAddress2, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.StreetAddress2)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>City</label>
+                    @Html.TextBoxFor(x => x.Purchase.City, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.City)</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>State</label>
+                    @Html.DropDownListFor(x => x.Purchase.StateId, Model.StatesList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.StateId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Zipcode</label>
+                    @Html.TextBoxFor(x => x.Purchase.ZipCode, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.ZipCode)</span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Purchase Price</label>
+                    @Html.TextBoxFor(x => x.Purchase.PurchasePrice, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.PurchasePrice)</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>State</label>
+                    @Html.DropDownListFor(x => x.Purchase.PurchaseTypeId, Model.PurchaseTypeList, new { @class = "form-control" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Purchase.PurchaseTypeId)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button type="@Url.Action("Index", "Reports")" class="btn btn-default">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

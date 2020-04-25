@@ -1,0 +1,62 @@
+﻿@model CARMASTERY.Models.ViewModels.InventoryViewModel
+
+@{
+    ViewBag.Title = "Inventory";
+}
+<div class="row">
+    <h1>Inventory Report </h1>
+</div>
+
+<div class="col-md-4">
+    <strong>New Vehicles</strong>
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Count</th>
+                <th>Stock Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model.NewVehicles)
+            {
+                <tr>
+                    <td>@vehicle.Year</td>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.Count</td>
+                    <td>@vehicle.StockValue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <strong>Used Vehicles</strong>
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Count</th>
+                <th>Stock Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model.UsedVehicles)
+            {
+                <tr>
+                    <td>@vehicle.Year</td>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.Count</td>
+                    <td>@vehicle.StockValue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
